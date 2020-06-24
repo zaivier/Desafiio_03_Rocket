@@ -15,27 +15,21 @@ function App() {
  
   async function handleAddRepository() {
     
-    const response = await api.post('repositories',  { 
-      id: 111111,     
+    const response = await api.post('repositories',  {       
       url: "https://github.com/josepholiveira",
       title: "Desafio ReactJS",
       techs: ["React", "Node.js"],
     });
 
-    if(response.status == 200){
-      setRepositories([...repositories, response.data]);
-    }    
+    
+    setRepositories([...repositories, response.data]);
+        
   }
 
   async function handleRemoveRepository(id) 
   {
-    const response = await api.delete(`repositories/${id}`).then(()=>{
-      api.get('/repositories').then(response => {
-        
-        setRepositories(response.data);
-        console.log(response.data);       
-     });
-    });    
+    const response = await api.delete(`repositories/${id}`);
+    setRepositories([]);    
   }
 
   return (
